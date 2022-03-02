@@ -39,8 +39,13 @@ class FinanceController extends Controller
         }
         $q->orderBy('id', 'DESC');
 
+        $forCredit = clone $q;
+        $forDebit = clone $q;
 
         $data = $q->get();
+
+        $totalCredit = $forCredit->where('type', '=', 'credit')->sum('amount');
+        $totalDebit = $forDebit->where('type', '=', 'debit')->sum('amount');
 
         $paginatedData = $q->paginate($perPage);
 
@@ -57,7 +62,9 @@ class FinanceController extends Controller
         return [
             'data' => $paginatedData,
             'itemsCurrentPage' => $itemsInPage,
-            'pages' => $pageCount
+            'pages' => $pageCount,
+            'totalCredit' => $totalCredit,
+            'totalDebit' => $totalDebit
         ];
     }
 
