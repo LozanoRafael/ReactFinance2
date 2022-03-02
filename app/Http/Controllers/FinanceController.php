@@ -27,8 +27,12 @@ class FinanceController extends Controller
         // var_dump($queries);
         $q = Finance::where('user_id', auth()->user()->id);
         if (empty($search) === false) {
-            $q->where('name', 'LIKE', '%'.$search.'%');
-            $q->orWhere('group', 'LIKE', '%'.$search.'%');
+            // $q->where('name', 'LIKE', '%'.$search.'%');
+            // $q->orWhere('group', 'LIKE', '%'.$search.'%');
+            $q->where(function ($query) use ($search) {
+                $query->where('name', "like", "%" . $search . "%");
+                $query->orWhere('group', "like", "%" . $search . "%");
+            });
         }
         if (empty($datefrom) === false) {
             // var_dump(date('Y-m-d H:i:s', strtotime($datefrom)));
