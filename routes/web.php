@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FinanceController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,22 +26,6 @@ Route::get('/test', function () {
     return 'Test';
 });
 
-Route::get('/finance', [FinanceController::class, 'test']);
 
-Route::get('/finance/{id}', function ($id) {
-    return 'Test' . $id;
-});
-
-Route::post('/finance', function () {
-    return 'Test';
-});
-
-Route::post('/finance/update/', function () {
-    return 'Test';
-});
-
-Route::post('/finance/delete/', function () {
-    return 'Test';
-});
 
 require __DIR__.'/auth.php';
